@@ -74,10 +74,10 @@ const Features = () => {
                 </div>
 
                 {/* Grid Layout (Restored 7/5 Split) */}
-                <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-fr lg:auto-rows-[350px]">
+                <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-auto lg:auto-rows-[350px]">
 
                     {/* Card 1: Pixel Perfect (Span 7) */}
-                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-7 overflow-hidden rounded-[2rem] bg-gray-50 border border-gray-100 p-8 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-500 hover:-translate-y-1">
+                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-7 overflow-hidden rounded-[2rem] bg-gray-50 border border-gray-100 p-6 md:p-8 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-500 hover:-translate-y-1">
                         <div className="relative z-10 h-full flex flex-col justify-between">
                             <div className="relative z-20">
                                 <div className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
@@ -97,7 +97,7 @@ const Features = () => {
                     </div>
 
                     {/* Card 2: Lightning Fast (Span 5) - Back to Black with Metrics */}
-                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-5 overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-gray-800 p-8 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 text-white">
+                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-5 overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-gray-800 p-6 md:p-8 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 text-white">
                         <div className="relative z-10 flex flex-col h-full justify-between">
                             <div>
                                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 backdrop-blur-md group-hover:bg-white/20 transition-colors">
@@ -127,7 +127,7 @@ const Features = () => {
                     </div>
 
                     {/* Card 3: Strategy First (Span 5) - Light Blue/Indigo */}
-                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-5 overflow-hidden rounded-[2rem] bg-indigo-50/50 border border-indigo-100 p-8 hover:bg-indigo-50 transition-colors duration-500">
+                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-5 overflow-hidden rounded-[2rem] bg-indigo-50/50 border border-indigo-100 p-6 md:p-8 hover:bg-indigo-50 transition-colors duration-500">
                         <div className="relative z-10">
                             <div className="w-12 h-12 rounded-full bg-white border border-indigo-100 flex items-center justify-center mb-6 shadow-sm">
                                 <LineChart className="text-indigo-600" size={24} />
@@ -144,7 +144,7 @@ const Features = () => {
                     </div>
 
                     {/* Card 4: Mobile First (Span 7) - White with large image */}
-                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-7 overflow-hidden rounded-[2rem] bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 hover:-translate-y-1">
+                    <div ref={addToRefs} className="group relative col-span-1 md:col-span-3 lg:col-span-7 overflow-hidden rounded-[2rem] bg-white border border-gray-100 p-6 md:p-8 shadow-sm hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 hover:-translate-y-1">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full items-center">
                             <div className="order-2 md:order-1 relative h-48 md:h-full bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden group-hover:border-gray-200 transition-colors">
                                 <img

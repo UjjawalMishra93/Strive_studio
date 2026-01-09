@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Star, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -35,6 +35,31 @@ const testimonials = [
 const Testimonials = () => {
     const sectionRef = useRef(null);
     const headerRef = useRef(null);
+    const scrollRef = useRef(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    // Auto-scroll loop
+    useEffect(() => {
+        let animationFrameId;
+
+        const animateScroll = () => {
+            if (scrollRef.current && !isPaused) {
+                const { current } = scrollRef;
+                // Scroll speed
+                current.scrollLeft += 1;
+
+                // Infinite loop: Reset to 1/3 point when reaching 2/3 point
+                // (Assumes 3 duplicates of data)
+                if (current.scrollWidth > 0 && current.scrollLeft >= (current.scrollWidth / 3) * 2) {
+                    current.scrollLeft = (current.scrollWidth / 3);
+                }
+            }
+            animationFrameId = requestAnimationFrame(animateScroll);
+        };
+
+        animationFrameId = requestAnimationFrame(animateScroll);
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [isPaused]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -68,14 +93,6 @@ const Testimonials = () => {
                             <span className="text-gray-400">our word for it.</span>
                         </h2>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
-                            <ArrowRight className="rotate-180" size={20} />
-                        </button>
-                        <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
-                            <ArrowRight size={20} />
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -86,8 +103,14 @@ const Testimonials = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-                {/* Animating Row (Left) */}
-                <div className="flex whitespace-nowrap gap-8 animate-infinite-scroll hover:pause-animation">
+                {/* Scrollable Row */}
+                <div
+                    ref={scrollRef}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                    className="flex whitespace-nowrap gap-8 overflow-x-auto overflow-y-hidden scroll-smooth pb-8"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
                     {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
                         <div
                             key={i}
@@ -115,17 +138,11 @@ const Testimonials = () => {
             </div>
 
             <style jsx>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-infinite-scroll {
-          animation: scroll 40s linear infinite;
-        }
-        .hover\:pause-animation:hover {
-            animation-play-state: paused;
-        }
-      `}</style>
+                /* Hide scrollbar for Chrome/Safari/Opera */
+                .overflow-x-auto::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
         </section>
     );
 };

@@ -52,38 +52,47 @@ const Projects = () => {
 
     const projects = [
         {
-            id: 1,
-            title: "Lumina Fintech",
-            category: "Fintech • Web App",
-            description: "A complete banking dashboard redesign focusing on user accessibility and financial data visualization.",
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
+            id: "mishra-transport",
+            title: "Mishra Transport",
+            category: "Logistics • Web App",
+            description: "A modern logistics platform moving India's goods with trust, speed, and commitment.",
+            image: "/projects/mishra.png",
             year: "2024",
             size: "col-span-1 md:col-span-2" // Wide card
         },
         {
-            id: 2,
-            title: "Nebula Stream",
-            category: "SaaS • Branding",
-            description: "Brand identity and marketing site for an AI-powered video streaming platform.",
-            image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
-            year: "2023",
+            id: "arjuna-ai",
+            title: "Arjuna AI",
+            category: "AI Agent • SaaS",
+            description: "AI-powered interview agent that helps candidates ace technical interviews with real-time voice feedback.",
+            image: "/projects/arjuna_hero.png",
+            year: "2024",
+            size: "col-span-1 md:col-span-2" // Wide card
+        },
+        {
+            id: "tomato-food",
+            title: "Tomato",
+            category: "FoodTech • Frontend",
+            description: "A vibrant, appetite-inducing food delivery interface designed for local restaurant chains.",
+            image: "/projects/food_hero.png",
+            year: "2024",
             size: "col-span-1" // Tall card
         },
         {
-            id: 3,
-            title: "Flow State",
-            category: "E-Commerce • Mobile",
-            description: "Mobile-first shopping experience for a luxury wellness brand.",
-            image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2500&auto=format&fit=crop",
-            year: "2023",
+            id: "sundown-studio",
+            title: "Sundown Studio",
+            category: "Experiential • Design",
+            description: "A multi-disciplinary studio creating immersive, end-to-end digital environments with fluid motion.",
+            image: "/projects/sundown_hero.png",
+            year: "2024",
             size: "col-span-1" // Tall card
         },
         {
-            id: 4,
-            title: "Urban Architecture",
-            category: "Portfolio • Design",
-            description: "Minimalist portfolio showcasing architectural masterpieces.",
-            image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2670&auto=format&fit=crop",
+            id: "pixora-ai",
+            title: "Pixora AI",
+            category: "GenAI • SaaS",
+            description: "A futuristic AI image generation platform transforming text prompts into professional-grade visuals.",
+            image: "/projects/pixora_hero.png",
             year: "2024",
             size: "col-span-1 md:col-span-2" // Wide card
         }
