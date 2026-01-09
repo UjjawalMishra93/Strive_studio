@@ -15,12 +15,12 @@ const Navbar = () => {
     const location = useLocation();
 
     const navLinks = [
-        { id: 'about', label: 'About us' },
         { id: 'features', label: 'Why Us' },
         { id: 'services', label: 'Services' },
         { id: 'process', label: 'Process' },
         { id: 'work', label: 'Work' },
-        { id: 'reviews', label: 'Reviews' }
+        { id: 'reviews', label: 'Reviews' },
+        { id: 'about', label: 'About us' }
     ];
 
     // Scroll Logic
@@ -202,7 +202,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             <div className={`
-                fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden
+                fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden pointer-events-auto
                 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}
             `}>
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-100/50 via-transparent to-transparent pointer-events-none" />
