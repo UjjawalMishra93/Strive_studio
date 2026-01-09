@@ -159,12 +159,12 @@ const Navbar = () => {
 
                 {/* Desktop Navigation Links Container */}
                 <div
-                    className="hidden md:flex items-center relative p-1.5 bg-gray-100/90 backdrop-blur-sm rounded-full border border-gray-200/50 shadow-sm pointer-events-auto transition-transform duration-500 ease-in-out"
+                    className="hidden md:flex items-center relative p-2 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 pointer-events-auto transition-transform duration-500 ease-in-out"
                     ref={navRef}
                 >
                     {/* The Moving Pill Background */}
                     <div
-                        className="absolute h-[calc(100%-12px)] bg-white rounded-full shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 top-1.5"
+                        className="absolute h-[calc(100%-16px)] bg-black rounded-full shadow-lg transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 top-2"
                         style={{
                             left: indicatorStyle.left,
                             width: indicatorStyle.width,
@@ -179,8 +179,8 @@ const Navbar = () => {
                             ref={el => linkRefs.current[link.id] = el}
                             onClick={(e) => handleNavClick(e, link.id)}
                             className={`
-                                relative z-10 px-5 py-2 text-sm font-sans font-medium tracking-wide transition-colors duration-200
-                                ${activeSection === link.id ? 'text-black font-semibold' : 'text-gray-500 hover:text-gray-900'}
+                                relative z-10 px-6 py-2.5 text-sm font-sans font-semibold tracking-wide transition-colors duration-200 rounded-full
+                                ${activeSection === link.id ? 'text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-black'}
                             `}
                         >
                             {link.label}
