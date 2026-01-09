@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Button from './Button';
 import Logo from './Logo';
 
 const Navbar = () => {
-    const [activeSection, setActiveSection] = useState('about');
+    const [activeSection, setActiveSection] = useState('home');
     const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showFullNav, setShowFullNav] = useState(true);
     const navRef = useRef(null);
     const linkRefs = useRef({});
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const navLinks = [
         { id: 'about', label: 'About us' },
@@ -19,31 +23,77 @@ const Navbar = () => {
         { id: 'reviews', label: 'Reviews' }
     ];
 
-    // Scroll Spy Logic
+    // Scroll Logic
     useEffect(() => {
         const handleScroll = () => {
-            const scrollPosition = window.scrollY + 200; // Offset for better detection
-
-            for (const link of navLinks) {
-                const element = document.getElementById(link.id);
-                if (element) {
-                    const { offsetTop, offsetHeight } = element;
-                    if (
-                        scrollPosition >= offsetTop &&
-                        scrollPosition < offsetTop + offsetHeight
-                    ) {
-                        setActiveSection(link.id);
-                        break;
+            // 1. Scroll Spy
+            const scrollPosition = window.scrollY + 200;
+            if (location.pathname === '/') {
+                for (const link of navLinks) {
+                    if (link.id === 'about') continue;
+                    const element = document.getElementById(link.id);
+                    if (element) {
+                        const { offsetTop, offsetHeight } = element;
+                        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                            setActiveSection(link.id);
+                            break;
+                        }
                     }
                 }
+            }
+
+            // 2. Hide Branding/CTA on Scroll
+            // We'll use a threshold. Typically Hero is ~100vh. Let's use 600px safely.
+            // Or better: show if at top, hide if scrolled down significantly.
+            if (window.scrollY > 100) {
+                setShowFullNav(false);
+            } else {
+                setShowFullNav(true);
             }
         };
 
         window.addEventListener('scroll', handleScroll);
+        // Trigger once
         handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [location.pathname]);
+
+    // Active Pill Animation... (unchanged logic mostly, but dependent on activeSection)
+
+    const handleNavClick = (e, linkId) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+
+        if (linkId === 'about') {
+            if (location.pathname === '/about') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                navigate('/about');
+            }
+            setActiveSection('about');
+            return;
+        }
+
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                const element = document.getElementById(linkId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    setActiveSection(linkId);
+                }
+            }, 100);
+            return;
+        }
+
+        const element = document.getElementById(linkId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            setActiveSection(linkId);
+        }
+    };
+
 
     // Active Pill Animation Logic
     useEffect(() => {
@@ -83,20 +133,31 @@ const Navbar = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, [activeSection]);
 
-
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 bg-transparent">
-            {/* Main Header Container - Ensure items are visible */}
+        <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 bg-transparent pointer-events-none">
+            {/* Main Header Container */}
             <div className="flex items-center justify-between relative z-50">
                 {/* Logo */}
-                <div className="flex items-center gap-3 pointer-events-auto">
-                    <Logo className="w-8 h-8 text-black" fill="currentColor" />
-                    <span className="text-xl font-bold tracking-tight text-black">Strive Studio.</span>
+                <div
+                    className={`flex items-center gap-3 pointer-events-auto cursor-pointer group transition-all duration-500 transform ${showFullNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}
+                    onClick={() => navigate('/')}
+                >
+                    <Logo className="w-8 h-8 text-black transition-transform duration-300 group-hover:rotate-12" fill="currentColor" />
+                    <div className="relative flex flex-col items-center">
+                        <span className="text-xl md:text-2xl font-heading font-bold tracking-tighter text-black relative z-10">Strive Studio.</span>
+                        <svg
+                            className="absolute -bottom-1.5 left-0 w-full h-2 text-indigo-500/80"
+                            viewBox="0 0 100 10"
+                            preserveAspectRatio="none"
+                        >
+                            <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                        </svg>
+                    </div>
                 </div>
 
                 {/* Desktop Navigation Links Container */}
                 <div
-                    className="hidden md:flex items-center relative p-1.5 bg-gray-100/90 backdrop-blur-sm rounded-full border border-gray-200/50 shadow-sm pointer-events-auto"
+                    className="hidden md:flex items-center relative p-1.5 bg-gray-100/90 backdrop-blur-sm rounded-full border border-gray-200/50 shadow-sm pointer-events-auto transition-transform duration-500 ease-in-out"
                     ref={navRef}
                 >
                     {/* The Moving Pill Background */}
@@ -114,14 +175,10 @@ const Navbar = () => {
                             key={link.id}
                             href={`#${link.id}`}
                             ref={el => linkRefs.current[link.id] = el}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                document.querySelector(`#${link.id}`)?.scrollIntoView({ behavior: 'smooth' });
-                                setActiveSection(link.id);
-                            }}
+                            onClick={(e) => handleNavClick(e, link.id)}
                             className={`
-                                relative z-10 px-5 py-2 text-sm font-medium transition-colors duration-200
-                                ${activeSection === link.id ? 'text-black' : 'text-gray-500 hover:text-gray-900'}
+                                relative z-10 px-5 py-2 text-sm font-sans font-medium tracking-wide transition-colors duration-200
+                                ${activeSection === link.id ? 'text-black font-semibold' : 'text-gray-500 hover:text-gray-900'}
                             `}
                         >
                             {link.label}
@@ -129,8 +186,8 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                {/* CTA Button (Desktop) - Only show when at top or specific logic if needed, but here we keep it mostly visible or dependent on state */}
-                <div className={`hidden md:flex items-center pointer-events-auto transition-all duration-300 transform ${activeSection === 'about' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+                {/* CTA Button (Desktop) */}
+                <div className={`hidden md:flex items-center pointer-events-auto transition-all duration-500 transform ${showFullNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
                     <Button className="pl-5 pr-1 py-1 text-sm font-semibold">Let's Collaborate</Button>
                 </div>
 
@@ -154,15 +211,8 @@ const Navbar = () => {
                     <a
                         key={link.id}
                         href={`#${link.id}`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setIsMobileMenuOpen(false); // Close menu
-                            setTimeout(() => {
-                                document.querySelector(`#${link.id}`)?.scrollIntoView({ behavior: 'smooth' });
-                                setActiveSection(link.id);
-                            }, 300); // Slight delay for menu close animation
-                        }}
-                        className={`text-2xl font-bold tracking-tight ${activeSection === link.id ? 'text-indigo-600' : 'text-gray-900'}`}
+                        onClick={(e) => handleNavClick(e, link.id)}
+                        className={`text-3xl font-heading font-bold tracking-tight ${activeSection === link.id ? 'text-indigo-600' : 'text-gray-900'}`}
                     >
                         {link.label}
                     </a>

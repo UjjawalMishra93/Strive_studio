@@ -19,7 +19,7 @@ const Button = ({ children, className = "", onClick, variant = 'primary' }) => {
             onClick={onClick}
             className={`${baseStyles} ${themes[variant]} ${className}`}
         >
-            <span className="text-base font-medium font-sans tracking-wide">{children}</span>
+            <span className="text-base font-semibold font-sans tracking-wide">{children}</span>
 
             {/* Icon Container */}
             <div className={`relative w-10 h-10 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 ${iconStyles[variant]}`}>

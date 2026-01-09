@@ -40,24 +40,27 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={heroRef} id="about" className="relative flex flex-col items-center pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-white min-h-screen">
+        <section ref={heroRef} id="about" className="relative flex flex-col items-center pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden min-h-screen">
             {/* Premium Background Gradients */}
             {/* Light blue on the left */}
-            <div className="absolute top-[20%] -left-[10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-sky-100/40 rounded-full blur-[80px] md:blur-[120px] -z-10 pointer-events-none mix-blend-multiply opacity-80" />
+            <div className="absolute top-[20%] -left-[10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-purple-200/40 rounded-full blur-[80px] md:blur-[120px] -z-10 pointer-events-none opacity-80" />
             {/* Light yellow/orange on the right */}
-            <div className="absolute top-[10%] -right-[10%] w-[250px] md:w-[600px] h-[250px] md:h-[600px] bg-amber-50/60 rounded-full blur-[60px] md:blur-[100px] -z-10 pointer-events-none mix-blend-multiply opacity-80" />
+            <div className="absolute top-[10%] -right-[10%] w-[250px] md:w-[600px] h-[250px] md:h-[600px] bg-amber-100/40 rounded-full blur-[60px] md:blur-[100px] -z-10 pointer-events-none opacity-80" />
+
+            {/* Center Focus Glow - Enhanced Visibility */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[1000px] h-[500px] md:h-[1000px] bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
 
             <div className="container px-4 mx-auto text-center max-w-7xl relative z-10 flex flex-col items-center justify-center flex-1">
 
                 {/* Main Heading - Responsive Typography */}
-                <h1 ref={titleRef} className="text-[2.75rem] leading-[1.1] md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tight text-gray-950 md:leading-[1.05] mb-6 md:mb-8 mt-4 origin-bottom text-balance">
+                <h1 ref={titleRef} className="text-[2.75rem] leading-[1.05] md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tight text-gray-950 md:leading-[0.95] mb-6 md:mb-8 mt-4 origin-bottom text-balance text-shadow-sm">
                     Building bold brands <br className="hidden md:block" />
                     with thoughtful design
                 </h1>
 
                 {/* Subheading */}
-                <p ref={subtitleRef} className="max-w-md md:max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-xl text-gray-500 leading-relaxed font-normal text-balance">
-                    At <span className="font-semibold text-gray-800">Strive Studio</span>, we help small startups tackle the world's biggest challenges with tailored
+                <p ref={subtitleRef} className="max-w-md md:max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-xl text-gray-600 leading-relaxed font-medium text-balance">
+                    At <span className="font-semibold text-gray-900">Strive Studio</span>, we help small startups tackle the world's biggest challenges with tailored
                     solutions, guiding you from strategy to success in a competitive market.
                 </p>
 

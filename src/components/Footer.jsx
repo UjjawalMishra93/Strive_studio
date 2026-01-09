@@ -43,7 +43,7 @@ const Footer = () => {
                     <div className="col-span-1 sm:col-span-2 md:col-span-4">
                         <div className="flex items-center gap-3 mb-6">
                             <Logo className="w-8 h-8 text-white" fill="currentColor" />
-                            <span className="text-xl font-bold tracking-tight">Strive Studio.</span>
+                            <span className="text-xl font-heading font-bold tracking-tighter">Strive Studio.</span>
                         </div>
                         <p className="text-gray-500 max-w-sm leading-relaxed mb-8">
                             A digital design and development agency crafting premium experiences for forward-thinking brands.
@@ -109,8 +109,8 @@ const Footer = () => {
                     <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                        <span className="flex items-center gap-1 text-gray-700">
-                            Made with <Heart size={12} className="fill-gray-700" /> in India
+                        <span className="flex items-center gap-1 text-gray-500">
+                            Built by <span className="text-gray-300 hover:text-white transition-colors cursor-pointer font-medium">Ujjawal Mishra</span>
                         </span>
                     </div>
                 </div>
