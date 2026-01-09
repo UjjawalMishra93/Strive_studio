@@ -4,16 +4,22 @@ import About from './pages/About';
 import ProjectDetail from './pages/ProjectDetail';
 import ScrollToTop from './components/ScrollToTop';
 
+import { ModalProvider } from './context/ModalContext';
+import ProjectModal from './components/ProjectModal';
+
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/project/:id" element={<ProjectDetail />} />
-      </Routes>
-    </Router>
+    <ModalProvider>
+      <Router>
+        <ScrollToTop />
+        <ProjectModal />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+        </Routes>
+      </Router>
+    </ModalProvider>
   );
 }
 

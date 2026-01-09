@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Button from './Button';
 import Logo from './Logo';
+import { useModal } from '../context/ModalContext';
 
 const Navbar = () => {
     const [activeSection, setActiveSection] = useState('home');
@@ -11,6 +12,7 @@ const Navbar = () => {
     const [showFullNav, setShowFullNav] = useState(true);
     const navRef = useRef(null);
     const linkRefs = useRef({});
+    const { openModal } = useModal();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -188,7 +190,7 @@ const Navbar = () => {
 
                 {/* CTA Button (Desktop) */}
                 <div className={`hidden md:flex items-center pointer-events-auto transition-all duration-500 transform ${showFullNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
-                    <Button className="pl-5 pr-1 py-1 text-sm font-semibold">Let's Collaborate</Button>
+                    <Button onClick={openModal} className="pl-5 pr-1 py-1 text-sm font-semibold">Let's Collaborate</Button>
                 </div>
 
                 {/* Mobile Menu Button - Visible on small screens */}
@@ -219,7 +221,7 @@ const Navbar = () => {
                 ))}
 
                 <div className="mt-8">
-                    <Button className="pl-8 pr-8 py-3 text-lg font-semibold w-full">Let's Collaborate</Button>
+                    <Button onClick={openModal} className="pl-8 pr-8 py-3 text-lg font-semibold w-full">Let's Collaborate</Button>
                 </div>
             </div>
         </nav>

@@ -74,29 +74,29 @@ const About = () => {
             {/* Visual Story Grid */}
             <section ref={storyRef} className="py-20 px-6 md:px-12">
                 <div className="container mx-auto max-w-7xl">
-                    <div className="grid grid-cols-12 gap-6 h-[600px] md:h-[800px]">
+                    <div className="grid grid-cols-12 gap-6 h-auto md:h-[800px]">
                         {/* Large Left Image */}
-                        <div className="col-span-12 md:col-span-8 relative overflow-hidden rounded-[2rem] group">
+                        <div className="col-span-12 md:col-span-8 relative overflow-hidden rounded-[2rem] group h-[350px] md:h-auto">
                             <img
                                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop"
                                 alt="Team Working"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 reveal-image"
                             />
                             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                            <div className="absolute bottom-10 left-10 text-white">
-                                <h3 className="text-3xl font-heading font-bold mb-2">Collaboration</h3>
-                                <p className="opacity-80">Where ideas collide and brilliance is born.</p>
+                            <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-white">
+                                <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2">Collaboration</h3>
+                                <p className="opacity-80 text-sm md:text-base">Where ideas collide and brilliance is born.</p>
                             </div>
                         </div>
 
                         {/* Right Column Stack */}
                         <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
-                            <div className="flex-1 relative overflow-hidden rounded-[2rem] bg-black text-white p-8 group">
+                            <div className="relative overflow-hidden rounded-[2rem] bg-black text-white p-8 group h-[300px] md:h-auto md:flex-1">
                                 <ArrowUpRight className="w-12 h-12 text-yellow-400 mb-4 group-hover:scale-110 transition-transform" />
                                 <h3 className="text-2xl font-bold mb-2">Fast & Fearless</h3>
                                 <p className="text-gray-400 text-sm">We don't just keep up; we set the pace. Innovation waits for no one.</p>
                             </div>
-                            <div className="flex-1 relative overflow-hidden rounded-[2rem] group">
+                            <div className="relative overflow-hidden rounded-[2rem] group h-[300px] md:h-auto md:flex-1">
                                 <img
                                     src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
                                     alt="Brainstorming"

@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight, Star } from 'lucide-react';
 import Button from './Button';
 import gsap from 'gsap';
+import { useModal } from '../context/ModalContext';
 
 const Hero = () => {
+    const { openModal } = useModal();
     const heroRef = useRef(null);
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
@@ -68,7 +70,7 @@ const Hero = () => {
                 <div ref={ctaRef} className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-16 md:mb-24 px-4 w-full">
                     {/* Primary Button */}
                     <div className="w-full md:w-auto">
-                        <Button className="w-full md:w-auto pl-8 pr-3 py-3 text-lg justify-center">Get Started</Button>
+                        <Button onClick={openModal} className="w-full md:w-auto pl-8 pr-3 py-3 text-lg justify-center">Get Started</Button>
                     </div>
 
                     {/* Social Proof */}
