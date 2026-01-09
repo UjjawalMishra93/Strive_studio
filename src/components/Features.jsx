@@ -86,11 +86,11 @@ const Features = () => {
                                 <h4 className="text-2xl font-bold text-gray-900 mb-3">Pixel-Perfect Design</h4>
                                 <p className="text-gray-500 max-w-xs">Every pixel is calculated. We ensure your brand looks premium on 4K monitors and mobile screens alike.</p>
                             </div>
-                            <div className="absolute right-0 bottom-0 w-3/4 h-3/4 translate-x-12 translate-y-8 z-10 pointer-events-none">
+                            <div className="absolute right-0 bottom-0 w-full h-full translate-y-8 translate-x-8 z-10 pointer-events-none mix-blend-multiply">
                                 <img
-                                    src="https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=800&auto=format&fit=crop"
-                                    alt="Design Preview"
-                                    className="w-full h-full object-cover object-top rounded-tl-[2rem] shadow-2xl border-t border-l border-gray-100 opacity-90 group-hover:translate-x-[-10px] group-hover:translate-y-[-10px] transition-transform duration-500"
+                                    src="/projects/pixel_perfect_structure.png"
+                                    alt="Pixel perfect UI structure"
+                                    className="w-full h-full object-contain object-right opacity-90 group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
                         </div>
