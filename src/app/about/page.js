@@ -1,8 +1,9 @@
+"use client";
 import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight, Users, Box, Hexagon, Component, Globe } from 'lucide-react';
-import Button from '../components/Button';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Button from '../../components/Button';
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

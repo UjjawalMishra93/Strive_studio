@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, Check, ChevronLeft, Loader2 } from 'lucide-react';
@@ -68,9 +69,9 @@ const ProjectModal = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID || '').trim();
-        const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '').trim();
-        const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '').trim();
+        const serviceId = (process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '').trim();
+        const templateId = (process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '').trim();
+        const publicKey = (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '').trim();
 
         if (!serviceId || !templateId || !publicKey || serviceId === 'your_service_id') {
             alert("⚠️ EmailJS Configuration Missing!\n\nPlease open the .env file in your project folder and replace 'your_service_id', 'your_template_id', and 'your_public_key' with your actual credentials from emailjs.com.");

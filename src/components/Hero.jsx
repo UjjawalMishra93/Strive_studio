@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight, Star } from 'lucide-react';
 import Button from './Button';

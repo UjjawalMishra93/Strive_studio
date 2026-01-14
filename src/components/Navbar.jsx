@@ -1,5 +1,6 @@
+"use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useRouter, usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Button from './Button';
 import Logo from './Logo';
@@ -13,8 +14,8 @@ const Navbar = () => {
     const navRef = useRef(null);
     const linkRefs = useRef({});
     const { openModal } = useModal();
-    const navigate = useNavigate();
-    const location = useLocation();
+    const router = useRouter();
+    const pathname = usePathname();
 
     const navLinks = [
         { id: 'features', label: 'Why Us' },
@@ -30,7 +31,7 @@ const Navbar = () => {
         const handleScroll = () => {
             // 1. Scroll Spy
             const scrollPosition = window.scrollY + 200;
-            if (location.pathname === '/') {
+            if (pathname === '/') {
                 for (const link of navLinks) {
                     if (link.id === 'about') continue;
                     const element = document.getElementById(link.id);
@@ -59,7 +60,7 @@ const Navbar = () => {
         handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [location.pathname]);
+    }, [pathname]);
 
     // Active Pill Animation... (unchanged logic mostly, but dependent on activeSection)
 
@@ -68,17 +69,17 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
 
         if (linkId === 'about') {
-            if (location.pathname === '/about') {
+            if (pathname === '/about') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                navigate('/about');
+                router.push('/about');
             }
             setActiveSection('about');
             return;
         }
 
-        if (location.pathname !== '/') {
-            navigate('/');
+        if (pathname !== '/') {
+            router.push('/');
             setTimeout(() => {
                 const element = document.getElementById(linkId);
                 if (element) {
@@ -142,7 +143,7 @@ const Navbar = () => {
                 {/* Logo */}
                 <div
                     className={`flex items-center gap-3 pointer-events-auto cursor-pointer group transition-all duration-500 transform ${showFullNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}
-                    onClick={() => navigate('/')}
+                    onClick={() => router.push('/')}
                 >
                     <Logo className="w-8 h-8 text-black transition-transform duration-300 group-hover:rotate-12" fill="currentColor" />
                     <div className="relative flex flex-col items-center">

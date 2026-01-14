@@ -1,9 +1,11 @@
+"use client";
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight, Check, Layers, Palette, Type } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import Button from '../components/Button';
-import Footer from '../components/Footer';
+import Navbar from '../../../components/Navbar';
+import Button from '../../../components/Button';
+import Footer from '../../../components/Footer';
 
 const projectData = {
     "mishra-transport": {
@@ -305,7 +307,7 @@ const ProjectDetail = () => {
             {/* Hero Header */}
             <div className="pt-32 pb-20 px-6 bg-gray-50 border-b border-gray-200">
                 <div className="container mx-auto max-w-7xl">
-                    <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-black transition-colors mb-8 text-sm font-medium">
+                    <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-black transition-colors mb-8 text-sm font-medium">
                         <ArrowLeft size={16} /> Back to Work
                     </Link>
 
@@ -479,7 +481,7 @@ const ProjectDetail = () => {
             {/* Next Project Footer */}
             <div className="border-t border-gray-100 py-24 text-center">
                 <p className="text-gray-400 uppercase tracking-widest text-sm font-bold mb-6">Next Case Study</p>
-                <Link to={`/project/${project.nextProject}`} className="group inline-flex flex-col items-center">
+                <Link href={`/project/${project.nextProject}`} className="group inline-flex flex-col items-center">
                     <h2 className="text-5xl md:text-8xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-purple-500 transition-all duration-300">
                         Next Project
                     </h2>

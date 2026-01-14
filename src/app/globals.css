@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-heading: var(--font-syne), sans-serif;
+}
+
+body {
+  @apply antialiased text-gray-900 bg-white font-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading;
+}

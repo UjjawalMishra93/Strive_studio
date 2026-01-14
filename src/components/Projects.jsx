@@ -1,5 +1,6 @@
+"use client";
 import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import Button from './Button';
 import gsap from 'gsap';
@@ -8,7 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const sectionRef = useRef(null);
     const headerRef = useRef(null);
     const projectRefs = useRef([]);
@@ -126,7 +127,7 @@ const Projects = () => {
                             key={project.id}
                             ref={addToRefs}
                             className={`group cursor-pointer ${project.size}`}
-                            onClick={() => navigate(`/project/${project.id}`)}
+                            onClick={() => router.push(`/project/${project.id}`)}
                         >
                             {/* Image Container */}
                             <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] md:aspect-[16/10] mb-6">

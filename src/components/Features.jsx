@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from 'react';
 import { Layers, Zap, LineChart, Smartphone, MoveRight } from 'lucide-react';
 import gsap from 'gsap';

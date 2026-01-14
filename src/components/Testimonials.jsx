@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { Star, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
