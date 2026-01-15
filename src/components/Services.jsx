@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,9 +8,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
+    const router = useRouter(); // Initialize router
     const sectionRef = useRef(null);
     const headerRef = useRef(null);
     const serviceRefs = useRef([]);
+
+    // ... existing refs logic ...
 
     // Add references safely
     const addToRefs = (el) => {
@@ -54,25 +58,29 @@ const Services = () => {
             id: "01",
             title: "Web Development",
             description: "High-performance websites built with React, Next.js, and modern technologies. We prioritize speed, accessibility, and clean code.",
-            tags: ["React", "Next.js", "Tailwind", "Node.js"]
+            tags: ["React", "Next.js", "Tailwind", "Node.js"],
+            slug: "/services/web-development"
         },
         {
             id: "02",
             title: "UI/UX Design",
             description: "User-centered design that drives engagement. We create intuitive interfaces and stunning visuals that tell your brand story.",
-            tags: ["Figma", "Prototyping", "Design Systems", "User Research"]
+            tags: ["Figma", "Prototyping", "Design Systems", "User Research"],
+            slug: "/services/ui-ux-design"
         },
         {
             id: "03",
             title: "E-Commerce",
             description: "Scalable online stores that convert. From Shopify to custom solutions, we build seamless shopping experiences.",
-            tags: ["Shopify", "WooCommerce", "Stripe", "Conversion Rate Optimization"]
+            tags: ["Shopify", "WooCommerce", "Stripe", "Conversion Rate Optimization"],
+            slug: "/services/e-commerce"
         },
         {
             id: "04",
             title: "Brand Strategy",
             description: "More than just a logo. We define your brand voice, market positioning, and visual identity to stand out in a crowded market.",
-            tags: ["Identity", "Positioning", "Copywriting", "Art Direction"]
+            tags: ["Identity", "Positioning", "Copywriting", "Art Direction"],
+            slug: "/services/brand-strategy"
         }
     ];
 
@@ -104,6 +112,7 @@ const Services = () => {
                         <div
                             key={service.id}
                             ref={addToRefs}
+                            onClick={() => router.push(service.slug)}
                             className="group border-t border-white/10 py-10 md:py-16 hover:bg-white/5 transition-colors cursor-pointer"
                         >
                             <div className="flex flex-col md:flex-row gap-6 md:gap-8 md:items-start justify-between">

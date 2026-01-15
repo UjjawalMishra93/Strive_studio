@@ -57,7 +57,7 @@ const Projects = () => {
             title: "Mishra Transport",
             category: "Logistics • Web App",
             description: "A modern logistics platform moving India's goods with trust, speed, and commitment.",
-            image: "/projects/mishra.png",
+            image: "/projects/mishra_hero.png",
             year: "2024",
             size: "col-span-1 md:col-span-2" // Wide card
         },

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X, ArrowLeft } from 'lucide-react';
 import Button from './Button';
 import Logo from './Logo';
 import { useModal } from '../context/ModalContext';
@@ -16,6 +16,9 @@ const Navbar = () => {
     const { openModal } = useModal();
     const router = useRouter();
     const pathname = usePathname();
+
+    // Check if we are on a service detail page
+    const isServicePage = pathname?.startsWith('/services/');
 
     const navLinks = [
         { id: 'features', label: 'Why Us' },
@@ -158,48 +161,68 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* Desktop Navigation Links Container */}
-                <div
-                    className="hidden md:flex items-center relative p-2 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 pointer-events-auto transition-transform duration-500 ease-in-out"
-                    ref={navRef}
-                >
-                    {/* The Moving Pill Background */}
+                {/* Desktop Navigation Links Container - HIDDEN ON SERVICE PAGES */}
+                {!isServicePage && (
                     <div
-                        className="absolute h-[calc(100%-16px)] bg-black rounded-full shadow-lg transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 top-2"
-                        style={{
-                            left: indicatorStyle.left,
-                            width: indicatorStyle.width,
-                            opacity: indicatorStyle.opacity
-                        }}
-                    />
+                        className="hidden md:flex items-center relative p-2 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 pointer-events-auto transition-transform duration-500 ease-in-out"
+                        ref={navRef}
+                    >
+                        {/* The Moving Pill Background */}
+                        <div
+                            className="absolute h-[calc(100%-16px)] bg-black rounded-full shadow-lg transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] z-0 top-2"
+                            style={{
+                                left: indicatorStyle.left,
+                                width: indicatorStyle.width,
+                                opacity: indicatorStyle.opacity
+                            }}
+                        />
 
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.id}
-                            href={`#${link.id}`}
-                            ref={el => linkRefs.current[link.id] = el}
-                            onClick={(e) => handleNavClick(e, link.id)}
-                            className={`
-                                relative z-10 px-6 py-2.5 text-sm font-sans font-semibold tracking-wide transition-colors duration-200 rounded-full
-                                ${activeSection === link.id ? 'text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-black'}
-                            `}
-                        >
-                            {link.label}
-                        </a>
-                    ))}
-                </div>
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.id}
+                                href={`#${link.id}`}
+                                ref={el => linkRefs.current[link.id] = el}
+                                onClick={(e) => handleNavClick(e, link.id)}
+                                className={`
+                                    relative z-10 px-6 py-2.5 text-sm font-sans font-semibold tracking-wide transition-colors duration-200 rounded-full
+                                    ${activeSection === link.id ? 'text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-black'}
+                                `}
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                )}
 
-                {/* CTA Button (Desktop) */}
+                {/* CTA Button or Back Button (Desktop) */}
                 <div className={`hidden md:flex items-center pointer-events-auto transition-all duration-500 transform ${showFullNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
-                    <Button onClick={openModal} className="pl-5 pr-1 py-1 text-sm font-semibold">Let's Collaborate</Button>
+                    {isServicePage ? (
+                        <Button
+                            onClick={() => router.push('/')}
+                            variant="white"
+                            showIcon={false}
+                            className="pl-5 pr-5 py-2 text-sm font-bold border border-gray-200 hover:border-black group/back"
+                        >
+                            <ArrowLeft size={16} className="group-hover:translate-x-1 group-hover/back:-translate-x-1 transition-transform" />
+                            Back to Home
+                        </Button>
+                    ) : (
+                        <Button onClick={openModal} className="pl-5 pr-1 py-1 text-sm font-semibold">Let's Collaborate</Button>
+                    )}
                 </div>
 
                 {/* Mobile Menu Button - Visible on small screens */}
                 <button
                     className="md:hidden p-2 text-black bg-white/80 rounded-full border border-gray-200 backdrop-blur-md pointer-events-auto"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    onClick={() => {
+                        if (isServicePage) {
+                            router.push('/');
+                        } else {
+                            setIsMobileMenuOpen(!isMobileMenuOpen);
+                        }
+                    }}
                 >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isServicePage ? <ArrowLeft size={24} /> : (isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />)}
                 </button>
             </div>
 

@@ -10,48 +10,48 @@ import Footer from '../../../components/Footer';
 const projectData = {
     "mishra-transport": {
         title: "Mishra Transport",
-        subtitle: "Logistics • Case Study",
-        description: "A digital transformation for a leading North Indian logistics provider, modernizing fleet tracking and customer engagement.",
+        subtitle: "Regional Transport Specialists",
+        description: "Simplify your freight and logistics needs with a personal approach. We offer cost-efficient transport shipping across India, specializing in Delhi, Haryana, UP, & Rajasthan.",
         client: "Mishra Transport Services",
         year: "2024",
-        services: "Web Design, React Dev",
+        services: "Web Development, Logistics Tech",
         liveLink: "https://mishra-transport-service.vercel.app/",
         liveDisplay: "mishra-transport.app",
-        heroImage: "/projects/mishra.png",
+        heroImage: "/projects/mishra_hero.png",
         challenge: {
-            text: "Mishra Transport Services, with over 25 years of legacy, relied heavily on traditional offline operations. They lacked a digital footprint to attract modern B2B clients and showcase their extensive fleet of 500+ vehicles. The challenge was to translate their massive physical reliability into a digital trust signal.",
+            text: "Regional transport logistics often suffer from poor tracking and opaque pricing. Clients needed a reliable way to book Full Truck Load (FTL) and Part Truck Load (PTL) services without the hassle of traditional offline negotiations.",
             points: [
-                "No digital presence for a 25-year-old brand",
-                "Difficulty in showcasing diverse fleet capabilities",
-                "Need to reach new tech-savvy B2B clients"
+                "Lack of real-time shipment visibility",
+                "Complex booking processes",
+                "Need for pan-India reach"
             ]
         },
         solution: {
-            text: "We designed and developed a comprehensive web platform that highlights their scale and reliability. Using a bold 'Safety Orange' and 'Trust Navy' color palette, we created an interface that speaks to industrial strength and modern efficiency. The site features detailed service breakdowns and an easy inquiry flow.",
+            text: "We delivered a streamlined digital platform featuring a 'Request a Quote' system and detailed service breakdowns. The new identity emphasizes speed and reliability with a bold red palette, integrating tracking capabilities and 24/7 support channels.",
             points: [
-                "Modern, responsive fleet showcase",
-                "Trust-building UI with clear statistics",
-                "Simplified contact and inquiry funnel"
+                "Instant Quote Request System",
+                "Comprehensive Service Listing (FTL/PTL)",
+                "24/7 Customer Support Integration"
             ]
         },
         designSystem: {
-            typography: "Inter",
+            typography: "Inter / Sans-serif",
             colors: [
                 { name: "Surface", hex: "#FFFFFF" },
-                { name: "Brand Navy", hex: "#1e293b" },
-                { name: "Safety Orange", hex: "#ff6b2b" }
+                { name: "Brand Red", hex: "#DC2626" },
+                { name: "Brand Navy", hex: "#1e293b" }
             ],
-            fonts: ["Regular 400", "Medium 500", "Bold 700"]
+            fonts: ["Regular 400", "Bold 700", "ExtraBold 800"]
         },
         metrics: [
-            { value: "25+", label: "Years Experience" },
-            { value: "500+", label: "Vehicles Managed" },
-            { value: "98%", label: "On-Time Delivery" }
+            { value: "Real-time", label: "Tracking" },
+            { value: "24/7", label: "Support" },
+            { value: "Pan-India", label: "Network" }
         ],
         gallery: [
-            "/projects/mishra.png",
+            "/projects/mishra_hero.png",
             "/projects/mishra_services.png",
-            "/projects/mishra_fleet.png"
+            "/projects/mishra_footer.png"
         ],
         nextProject: "arjuna-ai"
     },
