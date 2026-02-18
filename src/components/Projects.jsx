@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
+import { projects } from '../data/projects';
 import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import Button from './Button';
@@ -51,53 +52,10 @@ const Projects = () => {
         return () => ctx.revert();
     }, []);
 
-    const projects = [
-        {
-            id: "mishra-transport",
-            title: "Mishra Transport",
-            category: "Logistics • Web App",
-            description: "A modern logistics platform moving India's goods with trust, speed, and commitment.",
-            image: "/projects/mishra_hero.png",
-            year: "2024",
-            size: "col-span-1 md:col-span-2" // Wide card
-        },
-        {
-            id: "arjuna-ai",
-            title: "Arjuna AI",
-            category: "AI Agent • SaaS",
-            description: "AI-powered interview agent that helps candidates ace technical interviews with real-time voice feedback.",
-            image: "/projects/arjuna_hero.png",
-            year: "2024",
-            size: "col-span-1 md:col-span-2" // Wide card
-        },
-        {
-            id: "tomato-food",
-            title: "Tomato",
-            category: "FoodTech • Frontend",
-            description: "A vibrant, appetite-inducing food delivery interface designed for local restaurant chains.",
-            image: "/projects/food_hero.png",
-            year: "2024",
-            size: "col-span-1" // Tall card
-        },
-        {
-            id: "sundown-studio",
-            title: "Sundown Studio",
-            category: "Experiential • Design",
-            description: "A multi-disciplinary studio creating immersive, end-to-end digital environments with fluid motion.",
-            image: "/projects/sundown_hero.png",
-            year: "2024",
-            size: "col-span-1" // Tall card
-        },
-        {
-            id: "pixora-ai",
-            title: "Pixora AI",
-            category: "GenAI • SaaS",
-            description: "A futuristic AI image generation platform transforming text prompts into professional-grade visuals.",
-            image: "/projects/pixora_hero.png",
-            year: "2024",
-            size: "col-span-1 md:col-span-2" // Wide card
-        }
-    ];
+    // Use only the first 4 projects for the featured section if plenty exist, or all if few.
+    // The original file had 5 projects. Let's use the imported list.
+    // If we want to filter specific ones, we can, but likely using all is fine or slice valid ones.
+    const featuredProjects = projects.filter(p => p.id !== "1"); // Example filter if needed, "1" was Lumina case study dummy
 
     return (
         <section ref={sectionRef} id="work" className="py-24 md:py-32 bg-white">
@@ -122,7 +80,7 @@ const Projects = () => {
 
                 {/* Masonry-style Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    {projects.map((project) => (
+                    {featuredProjects.map((project) => (
                         <div
                             key={project.id}
                             ref={addToRefs}
@@ -168,11 +126,13 @@ const Projects = () => {
 
                 {/* Bottom CTA */}
                 <div className="mt-16 md:mt-24 text-center pb-12 md:pb-20">
-                    <Button className="pl-10 pr-4 py-4 text-lg">
+                    <Button
+                        onClick={() => router.push('/work')}
+                        className="pl-10 pr-4 py-4 text-lg"
+                    >
                         View All Projects
                     </Button>
                 </div>
-
             </div>
         </section>
     );

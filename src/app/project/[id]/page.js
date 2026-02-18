@@ -1,302 +1,33 @@
+
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight, Check, Layers, Palette, Type } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, Layers, Palette, Type, X, ZoomIn } from 'lucide-react';
 import Navbar from '../../../components/Navbar';
 import Button from '../../../components/Button';
 import Footer from '../../../components/Footer';
-
-const projectData = {
-    "mishra-transport": {
-        title: "Mishra Transport",
-        subtitle: "Regional Transport Specialists",
-        description: "Simplify your freight and logistics needs with a personal approach. We offer cost-efficient transport shipping across India, specializing in Delhi, Haryana, UP, & Rajasthan.",
-        client: "Mishra Transport Services",
-        year: "2024",
-        services: "Web Development, Logistics Tech",
-        liveLink: "https://mishra-transport-service.vercel.app/",
-        liveDisplay: "mishra-transport.app",
-        heroImage: "/projects/mishra_hero.png",
-        challenge: {
-            text: "Regional transport logistics often suffer from poor tracking and opaque pricing. Clients needed a reliable way to book Full Truck Load (FTL) and Part Truck Load (PTL) services without the hassle of traditional offline negotiations.",
-            points: [
-                "Lack of real-time shipment visibility",
-                "Complex booking processes",
-                "Need for pan-India reach"
-            ]
-        },
-        solution: {
-            text: "We delivered a streamlined digital platform featuring a 'Request a Quote' system and detailed service breakdowns. The new identity emphasizes speed and reliability with a bold red palette, integrating tracking capabilities and 24/7 support channels.",
-            points: [
-                "Instant Quote Request System",
-                "Comprehensive Service Listing (FTL/PTL)",
-                "24/7 Customer Support Integration"
-            ]
-        },
-        designSystem: {
-            typography: "Inter / Sans-serif",
-            colors: [
-                { name: "Surface", hex: "#FFFFFF" },
-                { name: "Brand Red", hex: "#DC2626" },
-                { name: "Brand Navy", hex: "#1e293b" }
-            ],
-            fonts: ["Regular 400", "Bold 700", "ExtraBold 800"]
-        },
-        metrics: [
-            { value: "Real-time", label: "Tracking" },
-            { value: "24/7", label: "Support" },
-            { value: "Pan-India", label: "Network" }
-        ],
-        gallery: [
-            "/projects/mishra_hero.png",
-            "/projects/mishra_services.png",
-            "/projects/mishra_footer.png"
-        ],
-        nextProject: "arjuna-ai"
-    },
-    "arjuna-ai": {
-        title: "Arjuna AI",
-        subtitle: "AI Agent • SaaS",
-        description: "An intelligent interview coaching platform that uses voice-based AI to simulate real technical interviews and provide instant, actionable feedback.",
-        client: "Arjuna AI",
-        year: "2024",
-        services: "Product Design, Next.js Dev",
-        liveLink: "https://interviewer-platform-iota.vercel.app/",
-        liveDisplay: "arjuna.ai",
-        heroImage: "/projects/arjuna_hero.png",
-        challenge: {
-            text: "Technical candidates often fail not because of a lack of knowledge, but due to anxiety and poor communication during live interviews. Traditional mock interviews are expensive and hard to schedule. The challenge was to create an AI that feels like a human hiring manager.",
-            points: [
-                "High anxiety in live settings",
-                "Lack of objective, instant feedback",
-                "Difficulty practicing vocal communication"
-            ]
-        },
-        solution: {
-            text: "We built a voice-first AI agent that conducts realistic technical interviews. Using deep learning for speech-to-text and sentiment analysis, Arjuna allows candidates to speak naturally. The dashboard provides granular scoring on technical accuracy, communication style, and empathy.",
-            points: [
-                "Real-time Voice Interaction",
-                "Detailed Performance Analytics",
-                "Leaderboard & Gamification"
-            ]
-        },
-        designSystem: {
-            typography: "Inter / Roboto",
-            colors: [
-                { name: "Deep Space", hex: "#0f172a" },
-                { name: "Indigo Core", hex: "#6366f1" },
-                { name: "Success Green", hex: "#22c55e" }
-            ],
-            fonts: ["Regular 400", "Medium 500", "Bold 700"]
-        },
-        metrics: [
-            { value: "20k+", label: "Candidates Trained" },
-            { value: "78%", label: "Avg. User Score" },
-            { value: "Top 7%", label: "Percentile Ranking" }
-        ],
-        gallery: [
-            "/projects/arjuna_hero.png",
-            "/projects/arjuna_features.png",
-            "/projects/arjuna_detail.png"
-        ],
-        nextProject: "tomato-food"
-    },
-    "tomato-food": {
-        title: "Tomato",
-        subtitle: "FoodTech • Frontend",
-        description: "A vibrant, appetite-inducing food delivery interface designed to streamline the ordering process for local restaurants.",
-        client: "Tomato Delivery",
-        year: "2024",
-        services: "Frontend Dev, UI/UX",
-        liveLink: "https://food-delivery-wnrj.vercel.app/",
-        liveDisplay: "tomato.app",
-        heroImage: "/projects/food_hero.png",
-        challenge: {
-            text: "Local restaurant websites often suffer from clutter and poor mobile responsiveness, leading to cart abandonment. The goal was to create a 'hunger-inducing' interface that makes ordering as simple as possible.",
-            points: [
-                "Cluttered legacy menus",
-                "Poor mobile experience",
-                "Lack of visual appeal"
-            ]
-        },
-        solution: {
-            text: "We designed a visual-first experience where food photography takes center stage. Using a vibrant 'Tomato Red' identity, we built a seamless category explorer and a distraction-free checkout flow.",
-            points: [
-                "Visual Menu Navigation",
-                "Mobile-First Responsive Design",
-                "Appetizing Color Psychology"
-            ]
-        },
-        designSystem: {
-            typography: "Outfit / Poppins",
-            colors: [
-                { name: "Pure White", hex: "#FFFFFF" },
-                { name: "Tomato Red", hex: "#FF5200" },
-                { name: "Slate Text", hex: "#334155" }
-            ],
-            fonts: ["Regular 400", "Medium 500", "Bold 700"]
-        },
-        metrics: [
-            { value: "0.8s", label: "Load Time" },
-            { value: "100%", label: "Mobile Responsive" },
-            { value: "5⭐", label: "User Experience" }
-        ],
-        gallery: [
-            "/projects/food_hero.png",
-            "/projects/food_menu.png",
-            "/projects/food_detail.png"
-        ],
-        nextProject: "sundown-studio"
-    },
-    "sundown-studio": {
-        title: "Sundown Studio",
-        subtitle: "Experiential • Design",
-        description: "A premium design studio website featuring smooth scroll, complex animations, and an immersive user journey.",
-        client: "Sundown Studio",
-        year: "2024",
-        services: "Frontend Dev, GSAP Animation",
-        liveLink: "https://sundownstudio-woad.vercel.app/",
-        liveDisplay: "sundown.studio",
-        heroImage: "/projects/sundown_hero.png",
-        challenge: {
-            text: "Standard agency portfolios often feel static and lifeless. The client needed a digital space that moved and breathed, reflecting their philosophy of creating unique, evolving environments.",
-            points: [
-                "Need for advanced motion",
-                "Maintaining performance",
-                "Unconventional layout"
-            ]
-        },
-        solution: {
-            text: "We engineered a highly interactive experience using Locomotive Scroll for smooth inertia and GSAP for complex timeline animations. The result is a website that feels less like a page and more like a continuous journey.",
-            points: [
-                "Locomotive Smooth Scroll",
-                "GSAP Timeline Animations",
-                "Dynamic interactive elements"
-            ]
-        },
-        designSystem: {
-            typography: "Neue Montreal",
-            colors: [
-                { name: "Off-White", hex: "#EFEAE3" },
-                { name: "Bold Orange", hex: "#FE330A" },
-                { name: "Deep Void", hex: "#0B0500" }
-            ],
-            fonts: ["Regular 400", "Object Sans"]
-        },
-        metrics: [
-            { value: "60fps", label: "Animation Performance" },
-            { value: "GSAP", label: "Powered by GreenSock" },
-            { value: "100%", label: "Immersive Score" }
-        ],
-        gallery: [
-            "/projects/sundown_hero.png",
-            "/projects/sundown_work.png",
-            "/projects/sundown_detail.png"
-        ],
-        nextProject: "pixora-ai"
-    },
-    "pixora-ai": {
-        title: "Pixora AI",
-        subtitle: "GenAI • SaaS",
-        description: "A state-of-the-art image generation platform enabling users to create stunning visuals with simple text prompts.",
-        client: "Pixora Tech",
-        year: "2024",
-        services: "Full Stack, AI Integration",
-        liveLink: "https://pixora-hazel.vercel.app/",
-        liveDisplay: "pixora.ai",
-        heroImage: "/projects/pixora_hero.png",
-        challenge: {
-            text: "AI generation tools can often feel complex and intimidating to new users. We needed to bridge the gap between powerful diffusion models and an intuitive, easy-to-use creative interface.",
-            points: [
-                "Complex Model Parameters",
-                " intimidating UI/UX",
-                "Slow Generation Times"
-            ]
-        },
-        solution: {
-            text: "We built a sleek, dark-mode 'creator studio' that simplifies the workflow. By abstracting complex parameters behind smart presets and optimizing the Nebius AI backend, we achieved professional results in seconds.",
-            points: [
-                "Smart Prompt Assistant",
-                "Lightning-Fast Generation",
-                "Curated Style Presets"
-            ]
-        },
-        designSystem: {
-            typography: "Inter / Space Grotesk",
-            colors: [
-                { name: "Deep Void", hex: "#030014" },
-                { name: "Neon Purple", hex: "#A855F7" },
-                { name: "Electric Blue", hex: "#3B82F6" }
-            ],
-            fonts: ["Regular 400", "SemiBold 600"]
-        },
-        metrics: [
-            { value: "SDXL", label: "Model Architecture" },
-            { value: "<2s", label: "Generation Speed" },
-            { value: "API", label: "Developer Ready" }
-        ],
-        gallery: [
-            "/projects/pixora_hero.png",
-            "/projects/pixora_interface.png",
-            "/projects/pixora_detail.png"
-        ],
-        nextProject: "mishra-transport"
-    },
-    "1": {
-        title: "Lumina",
-        subtitle: "Fintech • Case Study",
-        description: "A complete banking dashboard redesign focusing on user accessibility and financial data visualization.",
-        client: "Lumina Financial",
-        year: "2024",
-        services: "Web Design, React Dev",
-        liveLink: "#",
-        liveDisplay: "lumina.finance",
-        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
-        challenge: {
-            text: "Lumina struggled with a legacy interface that was confusing for new crypto-curious users. The data density was too high, leading to cognitive overload and a bounce rate of 65%. They needed a solution that felt trustworthy yet modern.",
-            points: [
-                "High bounce rate on landing",
-                "Confusing navigation structure"
-            ]
-        },
-        solution: {
-            text: "We stripped the application down to its core value proposition. By using a modular bento-grid layout, we allowed users to customize their dashboard. We implemented a strict design system based on 'Trust Blue' and highly legible typography.",
-            points: [
-                "Custom Dashboard Widgets",
-                "Dark/Light Mode toggle"
-            ]
-        },
-        designSystem: {
-            typography: "Plus Jakarta Sans",
-            colors: [
-                { name: "Surface", hex: "#FFFFFF" },
-                { name: "Background", hex: "#0A0A0A" },
-                { name: "Primary", hex: "#4F46E5" }
-            ],
-            fonts: ["Regular 400", "Medium 500", "SemiBold 600", "Bold 700"]
-        },
-        metrics: [
-            { value: "300%", label: "Increase in Signups" },
-            { value: "0.9s", label: "Page Load Time" },
-            { value: "98%", label: "Customer Satisfaction" }
-        ],
-        gallery: [
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2500&auto=format&fit=crop"
-        ],
-        nextProject: "2"
-    }
-};
+import { projects } from '../../../data/projects';
 
 const ProjectDetail = () => {
     const { id } = useParams();
-    const project = projectData[id] || projectData["1"]; // Fallback to Lumina if not found
+    const project = projects.find(p => p.id === id) || projects.find(p => p.id === "1"); // Fallback to Lumina if not found
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
+
+    useEffect(() => {
+        if (selectedImage) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [selectedImage]);
 
     if (!project) return <div>Project not found</div>;
 
@@ -304,10 +35,31 @@ const ProjectDetail = () => {
         <div className="bg-white min-h-screen">
             <Navbar />
 
+            {/* Lightbox Modal */}
+            {selectedImage && (
+                <div
+                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 animate-in fade-in duration-300"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <button
+                        className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <X size={32} />
+                    </button>
+                    <img
+                        src={selectedImage}
+                        alt="Zoomed View"
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </div>
+            )}
+
             {/* Hero Header */}
             <div className="pt-32 pb-20 px-6 bg-gray-50 border-b border-gray-200">
                 <div className="container mx-auto max-w-7xl">
-                    <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-black transition-colors mb-8 text-sm font-medium">
+                    <Link href="/work" className="inline-flex items-center gap-2 text-gray-400 hover:text-black transition-colors mb-8 text-sm font-medium">
                         <ArrowLeft size={16} /> Back to Work
                     </Link>
 
@@ -348,12 +100,17 @@ const ProjectDetail = () => {
             </div>
 
             {/* Main Showcase Image */}
-            <div className="container mx-auto max-w-7xl px-4 -mt-12 mb-24 relative z-10">
-                <div className="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-gray-200 border border-gray-200 aspect-video bg-gray-100">
+            <div className="container mx-auto max-w-7xl px-4 -mt-12 mb-24 relative z-10 group cursor-zoom-in" onClick={() => setSelectedImage(project.heroImage)}>
+                <div className="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-gray-200 border border-gray-200 aspect-video bg-gray-100 relative">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 z-20 pointer-events-none">
+                        <div className="bg-white/90 backdrop-blur rounded-full p-4 shadow-xl">
+                            <ZoomIn size={24} />
+                        </div>
+                    </div>
                     <img
                         src={project.heroImage}
                         alt="Project Hero"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                 </div>
             </div>
@@ -434,7 +191,7 @@ const ProjectDetail = () => {
                             </div>
                             <div className="space-y-4">
                                 {project.designSystem.colors.map((color, idx) => (
-                                    <div key={idx} className={`flex items-center p-4 rounded-xl justify-between ${color.hex === '#FFFFFF' ? 'bg-white text-black' : 'bg-[#0a0a0a] border border-white/10 text-white'}`} style={color.hex !== '#FFFFFF' && color.hex !== '#0A0A0A' ? { backgroundColor: color.hex, border: 'none' } : {}}>
+                                    <div key={idx} className={`flex items-center p-4 rounded-xl justify-between ${color.hex === '#FFFFFF' || color.name === 'Cream' ? 'bg-white text-black' : 'bg-[#0a0a0a] border border-white/10 text-white'}`} style={color.hex !== '#FFFFFF' && color.hex !== '#0A0A0A' && color.name !== 'Cream' ? { backgroundColor: color.hex, border: 'none' } : {}}>
                                         <span className="font-bold">{color.name}</span>
                                         <span className="font-mono text-sm opacity-60">{color.hex}</span>
                                     </div>
@@ -445,19 +202,24 @@ const ProjectDetail = () => {
 
                     {/* Screenshot Parallax Grid */}
                     <div className="space-y-12">
-                        <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                            <img src={project.gallery[0] || project.heroImage} alt="UI 1" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                        </div>
-                        {project.gallery.length > 1 && (
-                            <div className="grid grid-cols-2 gap-8">
-                                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                                    <img src={project.gallery[1] || project.heroImage} alt="UI 2" className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity" />
+                        {project.gallery.map((imgSrc, idx) => (
+                            <div
+                                key={idx}
+                                className={`rounded-3xl overflow-hidden border border-white/10 shadow-2xl cursor-zoom-in group relative ${idx % 2 !== 0 ? 'md:w-3/4 md:ml-auto' : 'md:w-full'}`}
+                                onClick={() => setSelectedImage(imgSrc)}
+                            >
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-20 pointer-events-none">
+                                    <div className="bg-white/10 backdrop-blur-md rounded-full p-4 border border-white/20">
+                                        <ZoomIn className="text-white" size={32} />
+                                    </div>
                                 </div>
-                                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                                    <img src={project.gallery[2] || project.heroImage} alt="UI 3" className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity" />
-                                </div>
+                                <img
+                                    src={imgSrc}
+                                    alt={`Gallery ${idx + 1}`}
+                                    className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                                />
                             </div>
-                        )}
+                        ))}
                     </div>
 
                 </div>
